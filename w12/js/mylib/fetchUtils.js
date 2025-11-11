@@ -22,7 +22,24 @@ async function deleteItem(url, id) {
     }
 }
 
-export { getItems, deleteItem }
+async function addItem(url, item) {
+    try {
+        const res = await fetch(`${url}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(item),
+        })
+        if (res.status !== 201) throw new Error("Fail to add item")
+        const addedItem = res.json()
+        return addedItem
+    } catch (error) {
+        throw new Error(error.message)
+    }
+}
+
+export { getItems, deleteItem, addItem}
 //POST
 //PUT
 //DELETE

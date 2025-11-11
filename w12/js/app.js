@@ -1,38 +1,35 @@
-import { loadQuotes } from "./quoteManagement.js";
+import { deleteQuote, loadQuotes } from "./quoteManagement";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const quotes = await loadQuotes();
+document.addEventListener('DOMContentLoaded', async () => {
+    const quotes = await loadQuotes()
 
-  quotes.forEach((quote) => {
-      const div = document.createElement("div");
-      div.className = "quote-card";
-      div.dataset.id = quote.id;
-
-      const content = document.createElement("p");
-      content.textContent = `"${quote.content}"`;
-      const author = document.createElement("p");
-      author.textContent = quote.author;
-
-      div.appendChild(content);
-      div.appendChild(author);
-      quoteList.appendChild(div);
-
-      const divActions = document.createElement("div");
-      divActions.className = "actions";
-
-      const editBtn = document.createElement("button");
-      editBtn.dataset.id = quote.id;
-      editBtn.textContent = "Edit";
-      editBtn.className = "edit";
-
-      const deleteBtn = document.createElement("button");
-      deleteBtn.dataset.id = quote.id;
-      deleteBtn.textContent = "delete";
-      deleteBtn.className = "delete";
-
-      divActions.appendChild(editBtn);
-      divActions.appendChild(deleteBtn);
-      div.appendChild(divActions);
+    // create html quote cards
+    const quoteList = document.getElementById("quoteList")
+    quotes.forEach((quote) => {
+        quoteList.innerHTML += `<div class="quote-card" data-id="${quote.id}">
+                        <p>${quote.content}</p>
+                        <p class="author">${quote.author}</p>
+                        <div class="actions">
+                            <button class="edit" data-id="${quote.id}">Edit</button>
+                            <button class="delete" data-id="${quote.id}">Delete</button>
+                    </div>`
     });
-});
- 
+    const deleteBtns = document.querySelectorAll('button.delete')
+    deleteBtns.forEach((btn) => {
+        btn.addEventListener('click', handleDelete);
+    });
+})
+
+function handleDelete(e) {
+    console.log(e.target.dataset.id)
+
+    const removeId = e.target.dataset.id
+    const ans = confirm(`Do you want to delete quote: ${removeId}`)
+    if (ans) {
+        deleteQuote(removeId)
+        const removeTarget = document.querySelector(`[data-id="${removeId}"]`)
+        document.getElementById('quoteList').removeChild(removeTarget)
+    }
+}
+
+
