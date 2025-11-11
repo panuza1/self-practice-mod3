@@ -1,28 +1,16 @@
-// CRUD on quote 
-import { getItems, deleteItem, addItem } from "./mylib/fetchUtils";
-//GET Quotes
+//CRUD on quotes
+import { getItems, deleteItem, addItem, editItem } from "./myLib/fetchUtils.js"
 const quoteURL = `${import.meta.env.VITE_APP_URL}/quotes`
+//GET Quotes
 async function loadQuotes() {
-  try {
-      const quotes = await getItems(quoteURL);
-    console.log(quotes);
-    return quotes
-  } catch (error) {
-    alert(error)
-      return[];
-  }
+    try {
+        const quotes = await getItems(quoteURL)
+        console.log(quotes)
+        return quotes
+    } catch (error) {
+        alert(`Quote: ${error}`)
+    }
 }
-
-//DELETE
-async function deleteQuote(id) {
-  try {
-    const removeId = deleteItem(id)
-    return removeId
-  } catch (error) {
-    alert(`Quote: ${error}`)
-  }
-}
-//ADD
 async function addQuote(item) {
     try {
         const addedQuote = await addItem(quoteURL, item)
@@ -31,7 +19,25 @@ async function addQuote(item) {
         alert(`Quote: ${error}`)
     }
 }
-export { loadQuotes, deleteQuote, addQuote}
+
+async function editQuote(item) {
+    try {
+        const editedQuote = await editItem(quoteURL, item)
+        return editedQuote
+    } catch (error) {
+        alert(`Quote: ${error}`)
+    }
+}
+
+async function deleteQuote(id) {
+    try {
+        const removeId = await deleteItem(quoteURL, id)
+        return removeId
+    } catch (error) {
+        alert(`Quote: ${error}`)
+    }
+}
+export { loadQuotes, deleteQuote, addQuote, editQuote }
 //Create Quote
 //Edit Quote
 //Delete Quote

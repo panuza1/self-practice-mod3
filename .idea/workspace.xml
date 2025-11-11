@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae3efbcd-fa40-43eb-a32b-ee5d69868a16" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/w12/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/w12/data/db.json" beforeDir="false" afterPath="$PROJECT_DIR$/w12/data/db.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/w12/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/w12/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/w12/js/mylib/fetchUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/w12/js/mylib/fetchUtils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/w12/js/quoteManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/w12/js/quoteManagement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/w12/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/w12/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/w12/node_modules/.vite/deps/_metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/w12/node_modules/.vite/deps/_metadata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/w12/node_modules/.vite/deps/express.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/w12/node_modules/.vite/deps/express.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/w12/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/w12/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/w12/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/w12/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1762892768237</updated>
       <workItem from="1762892769649" duration="114000" />
-      <workItem from="1762893007902" duration="4122000" />
+      <workItem from="1762893007902" duration="6424000" />
     </task>
     <servers />
   </component>
