@@ -1,0 +1,1 @@
+week อาจารย์ได้ทบทวนเรื่องการ fetch ของ javascript 

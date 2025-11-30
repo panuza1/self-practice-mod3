@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="taskInput" placeholder="พิมพ์รายการที่จะทำ...">
+    <button id="addBtn">เพิ่มรายการ</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        // 1. เลือก Element มารอไว้
+        const input = document.getElementById('taskInput');
+        const btn = document.getElementById('addBtn');
+        const list = document.getElementById('taskList');
+
+        btn.addEventListener('click', function () {
+            const text = input.value;
+
+            // เช็คว่าถ้าไม่ได้พิมพ์อะไรมา ก็ไม่ต้องทำอะไร
+            if (text === "") {
+                alert("กรุณาพิมพ์ข้อความก่อน!");
+                return;
+            }
+
+
+            // สร้าง <li> ใหม่ขึ้นมา 
+            const newItem = document.createElement('li');
+
+            // ใส่ข้อความเข้าไปใน <li> ที่เพิ่งสร้าง
+            newItem.innerText = text;
+
+            list.appendChild(newItem);
+
+            // เคลียร์ช่อง input ให้ว่าง
+            input.value = '';
+        });
+    </script>
+
+</body>
+
+</html>

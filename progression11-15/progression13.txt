@@ -1,0 +1,1 @@
+week นี้ผมลองเขียน project ขึ้นมาเพื่อ ทดสอบ addEventListener ว่าเข้าใจถูกไหม โดยเมื่อ click button จะเอา value จากข้อความ มาแล้ว new item โดยการใส่ <li></li> ต่อๆลงไปเรื่อย 

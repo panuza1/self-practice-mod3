@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>ระบบช่วยอู้งาน แบบ 300% by jeng</title>
+    <style>
+        body { font-family: 'Comic Sans MS', sans-serif; text-align: center; padding: 50px; background-color: #f0f0f0; }
+        .late { color: red }
+        .safe {color: green;}
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1> เครื่องมือเอาตัวรอด </h1>
+        
+        <div id="timeDisplay">00:00:00</div>
+        <p id="statusText">กำลังประมวลผลความขี้เกียจ...</p>
+
+        <hr>
+
+        <p>ถ้าอาจารย์ถาม กดปุ่มนี้เพื่อหาเรื่องคุย!</p>
+        <button id="helpBtn"> ขอเรื่องไร้สาระด่วน!</button>
+
+        <div id="excuseBox"></div>
+    </div>
+
+    <script>
+        const timeDisplay = document.getElementById('timeDisplay');
+        const statusText = document.getElementById('statusText');
+        const helpBtn = document.getElementById('helpBtn');
+        const excuseBox = document.getElementById('excuseBox');
+
+        // เช็คเวลาทุกวินาที 
+        function updateClock() {
+            const now = new Date();
+            
+            // ดึงเวลามาโชว์
+            const timeString = now.toLocaleTimeString('th-TH');
+            timeDisplay.innerText = timeString;
+
+            // ถ้าชั่วโมงปัจจุบัน มากกว่าหรือเท่ากับ 9 ถือว่า "ตื่นสายแล้ว"
+            const currentHour = now.getHours(); 
+
+            if (currentHour >= 9) {
+                timeDisplay.classList.add('late'); // ใส่ Class สีแดง
+                timeDisplay.classList.remove('safe');
+                statusText.innerText = "😱 สายแล้วโว้ยยยย!! อาจารย์กำลังเล็งคุณอยู่";
+            } else {
+                timeDisplay.classList.add('safe');
+                timeDisplay.classList.remove('late');
+                statusText.innerText = "😌 ยังเช้าอยู่... นอนต่อได้";
+            }
+        }
+
+        // สั่งให้รัน updateClock ทุก 1 วินาที (1000 ms)
+        setInterval(updateClock, 1000);
+
+
+        helpBtn.addEventListener('click', async function() {
+            
+            helpBtn.innerText = "กำลังหาเรื่องแถ...";
+            helpBtn.disabled = true; // ห้ามกดซ้ำรัวๆ ปิดปุ่ม
+
+            try {
+                // fetch api มาจาก https://catfact.ninja/fact มันมีเรื่องไร้สารเยอะดีครับ ขอมาจาก chatgpt
+                const response = await fetch('https://catfact.ninja/fact');
+                const data = await response.json();
+
+                excuseBox.style.display = 'block'; // เปิดกล่อง
+                excuseBox.innerHTML = ''; // เคลียร์ของเก่า
+
+                // สร้างหัวข้อ
+                const title = document.createElement('h3');
+                title.innerText = "✨ บอกอาจารย์ว่า: รู้หรือไม่...";
+                title.style.color = "#ff9800";
+
+                // สร้างเนื้อหา 
+                const fact = document.createElement('p');
+                fact.innerText = `"${data.fact}"`;
+                fact.style.fontStyle = "italic";
+
+                // ยัดใส่กล่อง
+                excuseBox.appendChild(title);
+                excuseBox.appendChild(fact);
+
+            } catch (error) {
+                excuseBox.innerText = "ซวยแล้ว... เน็ตหลุด! ตัวใครตัวมัน";
+            } finally {
+                // คืนค่าปุ่มให้กดใหม่ได้ ไม่ว่าจะ error หรือไม่
+                helpBtn.innerText = "🚨 ขอเรื่องไร้สาระด่วน!";
+                helpBtn.disabled = false;
+            }
+        });
+
+    </script>
+</body>
+</html>

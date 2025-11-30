@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h2>ระบบเตรียมสอบ</h2>
+    
+    <div style="border:1px solid #333; padding:15px; width: 300px;">
+        <p>ขณะนี้: <strong id="nowShow">...</strong></p>
+        <p>วันสอบ: <strong id="examShow" style="color:blue">...</strong></p>
+        <hr>
+        <h3>เหลือเวลาอีก: <span id="countShow" style="color:red; font-size: 24px;">...</span> วัน</h3>
+    </div>
+
+    <script>
+        // การจัดการเวลาปัจจุบัน 
+        const now = new Date(); // เวลา ณ วินาทีนี้
+        
+        //  1*: เดือน (Month) เริ่มที่ 0 (ม.ค.=0, ธ.ค.=11)
+        // ดังนั้นต้อง +1 เสมอถ้าจะเอามาโชว์
+        const currentMonth = now.getMonth() + 1; 
+        
+        // 2*: วันในสัปดาห์ (Day) อาทิตย์=0, จันทร์=1
+        // ส่วนวันที่ (Date) คือเลขวันที่ 1-31 ปกติ
+        const currentDate = now.getDate();
+        const currentYear = now.getFullYear();
+
+        // โชว์ เวลา 
+        const nowString = `วันที่ ${currentDate}/${currentMonth}/${currentYear}`;
+        document.getElementById('nowShow').innerText = nowString;
+
+
+        // การกำหนดเวลาอนาคต 
+        // Format ที่ใช้ง่ายคือ  "YYYY-MM-DD"
+        const examDate = new Date('2025-11-30');  
+        
+        // แปลงเป็นภาษาไทย 
+        const examString = examDate.toLocaleDateString('th-TH', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+        document.getElementById('examShow').innerText = examString;
+
+
+        // การคำนวณเวลา
+        const diffInMs = examDate - now; // ผลลัพธ์หน่วยเป็น "มิลลิวินาที"
+
+        // สูตรแปลง มิลลิวินาที -> วัน    // สูตรนนี้มาจาก chatgpt ครับ 
+        // 1000 ms = 1 วิ
+        // 60 วิ = 1 นาที
+        // 60 นาที = 1 ชม
+        // 24 ชม = 1 วัน
+        const oneDayInMs = 1000 * 60 * 60 * 24;   
+        
+        // หารเอาเศษออก แล้วปัดเศษขึ้น เพราะถ้าเหลือ 0.1 วัน ก็นับเป็น 1 วัน
+        const daysLeft = Math.ceil(diffInMs / oneDayInMs);
+
+        // แสดงผล
+        if (daysLeft > 0) {
+            document.getElementById('countShow').innerText = daysLeft;
+        } else if (daysLeft === 0) {
+            document.getElementById('countShow').innerText = "สอบวันนี้!";
+        } else {
+            document.getElementById('countShow').innerText = "สอบเสร็จแล้ว";
+        }
+
+    </script>
+</body>
+</html>
